@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ckb" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101827">
+<title>QALADZE BAZAR | قەڵادزێ بازاڕ</title>
+<style>
+:root{--ink:#172033;--navy:#101827;--blue:#2563eb;--orange:#ff9900;--muted:#64748b;--line:#e5eaf1;--bg:#f3f5f8;--green:#16834a}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Tahoma,Arial,sans-serif;line-height:1.7}
+button,input,select,textarea{font:inherit}button{cursor:pointer;border:0}
+.top{background:var(--navy);color:white;padding:14px 4%;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.logo{font-size:22px;font-weight:900;letter-spacing:.2px}.logo b{color:var(--orange)}.sub{font-size:12px;color:#cbd5e1}
+.actions{display:flex;gap:8px;flex-wrap:wrap}.btn{padding:10px 15px;border-radius:10px;font-weight:800;background:#fff;color:var(--ink)}.btn.blue{background:var(--blue);color:white}.btn.dark{background:#263449;color:white}.btn.orange{background:var(--orange);color:#161616}
+main{max-width:1200px;margin:auto;padding:24px 16px 60px}
+.hero{background:linear-gradient(115deg,#101827,#173d6b 65%,#2563eb);color:white;border-radius:22px;padding:28px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;box-shadow:0 15px 35px #1e3a8a22}
+.hero h1{font-size:clamp(23px,4vw,36px);line-height:1.35;margin:0 0 8px}.hero p{margin:0;color:#dbeafe}.hero-tag{background:#ffffff18;border:1px solid #ffffff35;border-radius:14px;padding:13px 18px;font-weight:900}
+.tools{background:white;border:1px solid var(--line);border-radius:16px;margin:20px 0;padding:14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.search{flex:1;min-width:180px;padding:12px 14px;border:1px solid var(--line);border-radius:10px;outline:none}
+.categories{display:flex;gap:7px;flex-wrap:wrap}.cat{padding:9px 13px;border-radius:9px;background:#eef2f7;color:#475569;font-weight:800}.cat.active{background:var(--blue);color:white}
+.heading{display:flex;justify-content:space-between;align-items:center;margin:20px 2px 13px}.heading h2{margin:0;font-size:21px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;align-items:start}
+.product{background:white;border:1px solid var(--line);border-radius:17px;overflow:hidden;box-shadow:0 5px 18px #1720330a;display:flex;flex-direction:column;transition:.2s}
+.product:hover{transform:translateY(-4px);box-shadow:0 14px 28px #17203315}
+.photo{height:190px;background:#f8fafc;display:flex;align-items:center;justify-content:center;overflow:hidden}.photo img{width:100%;height:100%;object-fit:contain;padding:12px}.placeholder{font-size:42px;color:#94a3b8}
+.pbody{padding:14px;display:flex;flex-direction:column;gap:7px}.tag{font-size:11px;color:#1d4ed8;background:#eff6ff;padding:3px 9px;border-radius:20px;align-self:flex-start;font-weight:800}.pbody h3{margin:0;font-size:17px}
+.desc-toggle{background:#f1f5f9;color:#1e293b;padding:6px 10px;border-radius:8px;font-size:12px;font-weight:800;align-self:flex-start;transition:.15s}.desc-toggle:hover{background:#e2e8f0}
+.desc{display:none;margin:4px 0 0;padding:8px 10px;background:#f8fafc;border-right:3px solid var(--blue);border-radius:6px;color:var(--muted);font-size:12.5px;white-space:pre-line;word-break:break-word}.desc.open{display:block}
+.pfoot{padding:12px 14px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:8px}.price{color:var(--green);font-weight:900;direction:ltr;unicode-bidi:embed}.add{background:#ffd814;color:#171717;padding:9px 12px;border-radius:9px;font-weight:900}
+.empty{background:white;border:1px dashed #cbd5e1;border-radius:16px;padding:35px;text-align:center;color:var(--muted);grid-column:1/-1}
+footer{text-align:center;color:#64748b;font-size:12px;padding:22px}
+.overlay{display:none;position:fixed;inset:0;background:#0b1220b8;z-index:20;align-items:center;justify-content:center;padding:14px}.overlay.open{display:flex}.modal{background:white;border-radius:18px;width:min(560px,100%);max-height:92vh;overflow:auto;padding:20px;box-shadow:0 25px 70px #0005}.modalhead{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:14px}.modalhead h2{margin:0;font-size:20px}.close{background:#eef2f7;border-radius:8px;padding:5px 11px;font-size:20px}
+.field{display:flex;flex-direction:column;gap:5px;margin:10px 0}.field label{font-size:13px;font-weight:800;color:#475569}.field input,.field textarea,.field select{width:100%;padding:11px;border:1px solid #dbe2ea;border-radius:9px;background:#fbfcfe;outline:none}.field textarea{min-height:75px;resize:vertical}
+.cartrow,.adminrow{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px;background:#f8fafc;border:1px solid var(--line);border-radius:11px;margin:8px 0}.qty{display:flex;align-items:center;gap:8px}.qty button{background:white;border:1px solid var(--line);border-radius:7px;padding:2px 9px}.total{font-size:20px;font-weight:900;text-align:left;margin:14px 0;color:var(--green)}
+.toast{position:fixed;bottom:20px;left:50%;transform:translate(-50%,20px);background:#172033;color:white;padding:10px 17px;border-radius:30px;opacity:0;pointer-events:none;transition:.2s;z-index:50}.toast.show{opacity:1;transform:translate(-50%,0)}
+.danger{background:#fee2e2;color:#991b1b;padding:7px 10px;border-radius:8px;font-weight:800}
+@media(max-width:600px){.top{padding:12px 14px}.actions{width:100%}.actions .btn{flex:1}.hero{padding:21px}.tools{padding:10px}.search{order:-1;flex-basis:100%}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.photo{height:140px}.pbody{padding:10px}.pbody h3{font-size:14px}.desc-toggle{font-size:11px;padding:5px 8px}.desc{font-size:11px}.pfoot{padding:9px;flex-direction:column;align-items:stretch}.add{width:100%}.price{text-align:center}}
+</style>
+</head>
+<body>
+<header class="top">
+ <div><div class="logo">QALADZE <b>BAZAR</b></div><div class="sub">قەڵادزێ بازاڕ · بازاڕی ئۆنلاین</div></div>
+ <div class="actions"><button class="btn blue" id="cartOpen">🛒 سەبەتە (<span id="count">0</span>)</button><button class="btn dark" id="adminOpen">بەشی بەڕێوەبەر</button></div>
+</header>
+<main>
+ <section class="hero"><div><h1>بەخێربێیت بۆ قەڵادزێ بازاڕ</h1><p>کاڵاکانت بدۆزەرەوە، زیاد بکە بۆ سەبەتە و داواکارییەکەت بنێرە.</p></div><div class="hero-tag">⭐ کوالێتی · نرخ ڕوون · کڕینی ئاسان</div></section>
+ <section class="tools"><input id="search" class="search" placeholder="گەڕان بەدوای کاڵا..." /><div class="categories"><button class="cat active" data-cat="هەموو">هەموو</button><button class="cat" data-cat="ئەلیکترۆنی">ئەلیکترۆنی</button><button class="cat" data-cat="ماڵەوە">ماڵەوە</button><button class="cat" data-cat="جل‌وبەرگ">جل‌وبەرگ</button><button class="cat" data-cat="تر">تر</button></div></section>
+ <div class="heading"><h2>کاڵاکان</h2><span class="sub" id="productCount"></span></div>
+ <section id="products" class="grid"></section>
+</main>
+<footer>© <span id="year"></span> QALADZE BAZAR · هەموو مافەکان پارێزراون</footer>
+
+<div class="overlay" id="cartModal"><div class="modal">
+ <div class="modalhead"><h2>🛒 سەبەتەی کڕین</h2><button class="close" data-close="cartModal">×</button></div>
+ <div id="cartItems"></div><div class="total" id="total"></div>
+ <div class="field"><label>ناوی کڕیار</label><input id="customerName" placeholder="ناوت بنووسە"></div>
+ <div class="field"><label>ژمارەی مۆبایل</label><input id="customerPhone" placeholder="0750..."></div>
+ <div class="field"><label>ناونیشان</label><textarea id="customerAddress" placeholder="ناونیشانی گەیاندن"></textarea></div>
+ <button class="btn blue" id="whatsappOrder" style="width:100%">ناردنی داواکاری لە واتساپ</button>
+</div></div>
+
+<div class="overlay" id="loginModal"><div class="modal">
+ <div class="modalhead"><h2>چوونەژوورەوەی بەڕێوەبەر</h2><button class="close" data-close="loginModal">×</button></div>
+ <div class="field"><label>وشەی نهێنی</label><input id="adminPass" type="password" placeholder="وشەی نهێنی"></div>
+ <button class="btn blue" id="loginBtn" style="width:100%">چوونەژوورەوە</button>
+ <p class="sub">تێبینی: لەم جۆرە وێبسایتەدا وشەی نهێنی پاراستنی تەواو نییە، چونکە کۆدەکە لە ناو وێبگەڕدا دەخوێندرێتەوە.</p>
+</div></div>
+
+<div class="overlay" id="adminModal"><div class="modal">
+ <div class="modalhead"><h2>⚙️ بەڕێوەبردنی کاڵاکان</h2><button class="close" data-close="adminModal">×</button></div>
+ <form id="addForm">
+  <div class="field"><label>ناوی کاڵا</label><input id="pName" required placeholder="ناوی کاڵا"></div>
+  <div class="field"><label>نرخ بە دۆلاری ئەمریکی (USD)</label><input id="pPrice" type="number" min="0.01" step="0.01" required placeholder="بۆ نموونە 25.99"></div>
+  <div class="field"><label>بەش</label><select id="pCategory"><option>ئەلیکترۆنی</option><option>ماڵەوە</option><option>جل‌وبەرگ</option><option>تر</option></select></div>
+  <div class="field"><label>لینکی وێنە</label><input id="pImage" type="url" placeholder="https://..."></div>
+  <div class="field"><label>وەسفی کاڵا</label><textarea id="pDesc" placeholder="زانیارییەکانی کاڵا"></textarea></div>
+  <button class="btn blue" type="submit" style="width:100%">+ زیادکردنی کاڵا</button>
+ </form>
+ <hr style="border:0;border-top:1px solid var(--line);margin:18px 0">
+ <h3>لیستی کاڵاکان</h3><div id="adminList"></div>
+ <button class="btn dark" id="logout" style="width:100%;margin-top:10px">چوونەدەرەوە</button>
+</div></div>
+<div class="toast" id="toast"></div>
+<script>
+/* QALADZE BAZAR — وشەی نهێنیی بەڕێوەبەر */
+const ADMIN_PASSWORD = "qaladzeshar2022";
+const WHATSAPP_NUMBER = "9647508475838";
+const PRODUCT_KEY = "qb_products_v3";
+const CART_KEY = "qb_cart_v3";
+const starterProducts = [
+ {id:"welcome-1",name:"کاڵای نموونە",price:19.99,category:"ئەلیکترۆنی",image:"",description:"ئەمە کاڵایەکی نموونەیە. لە بەشی بەڕێوەبەرەوە کاڵاکانی خۆت زیاد بکە."}
+];
+let products = read(PRODUCT_KEY, starterProducts);
+let cart = read(CART_KEY, []);
+let category = "هەموو", query = "", isAdmin = false;
+
+function read(key, fallback){
+ try{const v=JSON.parse(localStorage.getItem(key));return Array.isArray(v)?v:fallback}
+ catch{return fallback}
+}
+function save(){
+ localStorage.setItem(PRODUCT_KEY,JSON.stringify(products));
+ localStorage.setItem(CART_KEY,JSON.stringify(cart));
+}
+function usd(value){
+ return new Intl.NumberFormat("en-US",{style:"currency",currency:"USD"}).format(Number(value)||0);
+}
+function safe(s){
+ return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+function toast(s){
+ const t=document.getElementById("toast");
+ t.textContent=s;t.classList.add("show");
+ setTimeout(()=>t.classList.remove("show"),2300);
+}
+function show(id){document.getElementById(id).classList.add("open")}
+function hide(id){document.getElementById(id).classList.remove("open")}
+
+document.getElementById("year").textContent=new Date().getFullYear();
+document.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>hide(b.dataset.close));
+document.querySelectorAll(".overlay").forEach(o=>o.addEventListener("click",e=>{if(e.target===o)hide(o.id)}));
+
+window.toggleDesc=id=>{
+ const el=document.getElementById("desc-"+id);
+ const btn=document.getElementById("desc-btn-"+id);
+ if(!el||!btn)return;
+ const open=el.classList.toggle("open");
+ btn.textContent=open?"داخستنی وەسفکردن":"وەسفکردن";
+};
+
+function render(){
+ const found=products.filter(p=>
+  (category==="هەموو"||p.category===category)&&
+  (`${p.name} ${p.description||""}`).toLowerCase().includes(query.toLowerCase())
+ );
+ document.getElementById("productCount").textContent=found.length+" کاڵا";
+ document.getElementById("products").innerHTML=found.length?found.map(p=>{
+  const hasDesc=Boolean(p.description&&p.description.trim());
+  const descBlock=hasDesc
+   ?`<button type="button" class="desc-toggle" id="desc-btn-${safe(p.id)}" onclick="toggleDesc('${safe(p.id)}')">وەسفکردن</button><p class="desc" id="desc-${safe(p.id)}">${safe(p.description)}</p>`
+   :"";
+  return `<article class="product">
+   <div class="photo">${p.image?`<img src="${safe(p.image)}" alt="${safe(p.name)}" onerror="this.remove()">`:'<span class="placeholder">▧</span>'}</div>
+   <div class="pbody"><span class="tag">${safe(p.category)}</span><h3>${safe(p.name)}</h3>${descBlock}</div>
+   <div class="pfoot"><span class="price">${usd(p.price)}</span><button class="add" onclick="addCart('${safe(p.id)}')">زیادکردن بۆ سەبەتە</button></div>
+  </article>`;
+ }).join(""):'<div class="empty">هیچ کاڵایەک نەدۆزرایەوە.</div>';
+}
+function updateCount(){
+ document.getElementById("count").textContent=cart.reduce((s,x)=>s+x.qty,0);
+}
+window.addCart=id=>{
+ const p=products.find(x=>x.id===id);if(!p)return;
+ let item=cart.find(x=>x.id===id);
+ if(item)item.qty++;else cart.push({id:p.id,name:p.name,price:Number(p.price),qty:1});
+ save();updateCount();toast("کاڵاکە خرایە سەبەتەوە");
+};
+window.qty=(id,d)=>{
+ const x=cart.find(i=>i.id===id);if(!x)return;
+ x.qty+=d;if(x.qty<=0)cart=cart.filter(i=>i.id!==id);
+ save();renderCart();updateCount();
+};
+function renderCart(){
+ const el=document.getElementById("cartItems");
+ el.innerHTML=cart.length?cart.map(i=>`
+  <div class="cartrow"><div><b>${safe(i.name)}</b><div class="sub">${usd(i.price)} × ${i.qty}</div></div>
+  <div class="qty"><button onclick="qty('${safe(i.id)}',-1)">−</button>${i.qty}<button onclick="qty('${safe(i.id)}',1)">+</button></div></div>
+ `).join(""):'<div class="empty">سەبەتەکەت بەتاڵە.</div>';
+ document.getElementById("total").textContent=cart.length
+  ?"کۆی گشتی: "+usd(cart.reduce((s,i)=>s+i.price*i.qty,0)):"";
+}
+document.getElementById("cartOpen").onclick=()=>{renderCart();show("cartModal")};
+
+document.getElementById("whatsappOrder").onclick=()=>{
+ if(!cart.length)return toast("سەبەتەکەت بەتاڵە");
+ const val=id=>document.getElementById(id).value.trim()||"نەنووسراوە";
+ const lines=cart.map((i,n)=>`${n+1}. ${i.name} × ${i.qty} — ${usd(i.price*i.qty)}`);
+ const total=cart.reduce((s,i)=>s+i.price*i.qty,0);
+ const msg=["داواکاری نوێ — قەڵادزێ بازاڕ","ناو: "+val("customerName"),
+  "مۆبایل: "+val("customerPhone"),"ناونیشان: "+val("customerAddress"),
+  "کاڵاکان:",...lines,"کۆی گشتی: "+usd(total)].join("\n");
+ window.open("https://wa.me/"+WHATSAPP_NUMBER+"?text="+encodeURIComponent(msg),"_blank");
+};
+
+document.getElementById("adminOpen").onclick=()=>{
+ if(isAdmin){renderAdmin();show("adminModal")}else show("loginModal");
+};
+document.getElementById("loginBtn").onclick=()=>{
+ if(document.getElementById("adminPass").value===ADMIN_PASSWORD){
+  isAdmin=true;document.getElementById("adminPass").value="";
+  hide("loginModal");renderAdmin();show("adminModal");
+ }else toast("وشەی نهێنی هەڵەیە");
+};
+document.getElementById("adminPass").addEventListener("keydown",e=>{
+ if(e.key==="Enter")document.getElementById("loginBtn").click();
+});
+document.getElementById("logout").onclick=()=>{isAdmin=false;hide("adminModal")};
+
+document.getElementById("addForm").onsubmit=e=>{
+ e.preventDefault();
+ const price=Number(document.getElementById("pPrice").value);
+ const name=document.getElementById("pName").value.trim();
+ if(!name)return toast("ناوی کاڵا بنووسە");
+ if(!Number.isFinite(price)||price<=0)return toast("نرخێکی دروست بە دۆلار بنووسە");
+ products.unshift({
+  id:"p"+Date.now(),name,price,
+  category:document.getElementById("pCategory").value,
+  image:document.getElementById("pImage").value.trim(),
+  description:document.getElementById("pDesc").value.trim()
+ });
+ save();e.target.reset();render();renderAdmin();toast("کاڵاکە بە سەرکەوتوویی زیادکرا");
+};
+
+function renderAdmin(){
+ const el=document.getElementById("adminList");
+ el.innerHTML=products.length?products.map(p=>`
+  <div class="adminrow">
+   <div><b>${safe(p.name)}</b><div class="sub">${usd(p.price)} · ${safe(p.category)}</div></div>
+   <button class="danger" onclick="deleteProduct('${safe(p.id)}')">سڕینەوە</button>
+  </div>
+ `).join(""):'<div class="empty">هیچ کاڵایەک نییە.</div>';
+}
+window.deleteProduct=id=>{
+ if(!confirm("دڵنیایت لە سڕینەوەی ئەم کاڵایە؟"))return;
+ products=products.filter(p=>p.id!==id);
+ cart=cart.filter(i=>i.id!==id);
+ save();render();renderAdmin();renderCart();updateCount();toast("کاڵاکە سڕایەوە");
+};
+
+document.getElementById("search").addEventListener("input",e=>{
+ query=e.target.value.trim();render();
+});
+document.querySelectorAll(".cat").forEach(btn=>{
+ btn.addEventListener("click",()=>{
+  category=btn.dataset.cat;
+  document.querySelectorAll(".cat").forEach(x=>x.classList.toggle("active",x===btn));
+  render();
+ });
+});
+
+render();updateCount();
+</script>
+</body>
+</html>
